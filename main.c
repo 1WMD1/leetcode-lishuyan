@@ -127,3 +127,28 @@
 // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 // 
 
+
+
+
+int main()
+{
+//随机创建一维数组
+	int array[10];
+	arr_setup_1D(10,array);
+	for(int i =0;i<10 ;i++)
+	{
+		printf("第%d个元素是%d\n",i,array[i]);
+	}
+//寻找索引
+	int err=center_index_array(array, 10);
+	if(err == -1){
+		printf("数组没有找到合适的中心下标\n");
+	}
+	else
+	{
+		printf("找到了中心下标志%d\n",err);
+
+	}
+	return 0;
+
+}

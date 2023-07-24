@@ -8,20 +8,28 @@
 
 //生成一个数组
 void arr_setup_1D(int n,int* array){
-		//设置随机数种子
-		srand(time(0));
-		//循环遍历给数组赋值
-		for(int i=0;i<n;i++)
-		{
-			array[i] = rand()%100;	
-		}
 
+	//自动赋值
+		// //设置随机数种子
+		// srand(time(0));
+		// //循环遍历给数组赋值
+		// for(int i=0;i<n;i++)
+		// {
+		// 	array[i] = rand()%100;	
+		// }
+	//手动赋值
+		for (int i = 0; i < n; i++) 
+		{
+        	printf("请输入第 %d 个元素的值：", i + 1);
+        	scanf("%d", &array[i]);
+    	}
 	
 }
 
 
 //生成二维数组
 void arr_setup_2D(int row,int col,int array[row][col]){
+	//自动给二维数组赋值
 		//设置随机数种子
 		srand(time(0));
 		//循环遍历给数组赋值
@@ -32,7 +40,15 @@ void arr_setup_2D(int row,int col,int array[row][col]){
 			}
 			
 		}
-
+	// //手动给二维数组赋值
+	// 	for (int i = 0; i < row; i++)
+	// 	{
+ //        	for (int j = 0; j < col; j++) 
+ //        	{
+ //            	printf("请输入第 %d 行第 %d 列元素的值：", i + 1, j + 1);
+ //            	scanf("%d", &arr[i][j]);
+ //            }
+ //        }
 	
 }
 
@@ -108,4 +124,20 @@ void zero_arr(struct array_2D_flag* flags_arr,int row,int col,int array[row][col
 	}
 	printf("清0操作完成！\n");
 
+}
+
+
+//一维数组寻找中心索引
+int center_index_array(int* array, int n)
+{
+    int i, totalarray = 0, leftarray = 0;
+    for (i = 0; i < n; i++)
+        totalarray += array[i] ;
+    for (i = 0; i < n; i++)
+    {
+        if (leftarray * 2 + array[i] == totalarray)
+            return i;
+        leftarray += array[i];
+    }
+    return -1;
 }
