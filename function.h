@@ -20,6 +20,15 @@ int insertSearch(int *array, int len, int target);//插值查找，依旧是顺�
 
 
 
+//排序
+void InsertSort(int* array, int len);// 插入排序
+// 希尔排序
+// 选择排序
+// 冒泡排序
+// 堆排序
+// 快速排序
+
+
 
 /*===============================================================================1、翻转矩阵===============================================================================*/
 void rotate(int row,int col,int array[row][col]);//翻转矩阵
@@ -37,5 +46,14 @@ void zero_arr(struct array_2D_flag* flags_arr,int row,int col,int array[row][col
 
 /*===============================================================================3、寻找数组的中心索引===============================================================================*/
 int center_index_array(int* array, int n);//一维数组寻找中心索引
+
+
+struct section
+	{
+		int left;
+		int right;
+	};
+void InsertSort_section(struct section* array, int len);//区间插入排序
+void merge_section(struct section * array,int len);//合并区间
 
 #endif

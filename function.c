@@ -235,3 +235,165 @@ int insertSearch(int *array, int len, int target)
  	}
  	return -1;
  }
+
+// struct section * merge_section(struct section* array,int len)
+//  {
+//  	int i;
+//  	struct section *array2;
+//  	array = (struct section *)malloc(sizeof(struct section)*3)
+//  	for(i = 0;i<len;i++)
+//  	{
+//  		int flags_left,flags_right;
+//  		flags_left = array[i].left;
+//  		flags_right = array[i].right;
+//  		for (int j = i+1; j < len; j++)
+//  		{
+//  			if(array[i].left<array[j].left<array[i].right)
+//  			{
+
+//  			}
+//  			else if()
+//  			{
+
+//  			}
+//  		}
+ 		
+//  	}
+
+//  	return array2;
+//  }
+
+//  int array_cmp_int(const void *_a,const void *_b){
+//     int *a = *(int**)_a;
+//     int *b = *(int**)_b;
+//     return a[0] - b[0];
+// } 
+// int** merge(int** intervals, int intervalsSize, int* intervalsColSize, int* returnSize, int** returnColumnSizes){
+//     if (intervalsSize == 1) {
+//         *returnSize = 1;
+//         return intervals;
+//     }        
+//     qsort(intervals,intervalsSize,sizeof(int*),array_cmp_int);
+//     int** result = (int**)malloc(sizeof(int*) * intervalsSize);
+//     for (int i = 0; i < intervalsSize; i++) {
+//         result[i] = (int*)malloc(sizeof(int) * 2);
+//     }
+//     *returnSize = 0;
+//     int temp[2] = {intervals[0][0],intervals[0][1]};
+//     for (int i = 1; i < intervalsSize; i++) {
+//         if (intervals[i][0] <= temp[1]) { //如果遍历到的为重叠的区间，进行合并        
+//             temp[1] = fmax(temp[1],intervals[i][1]);
+//         } 
+//         else { //不重叠 
+//             result[*returnSize][0] = temp[0];
+//             result[*returnSize][1] = temp[1];
+//             temp[0] = intervals[i][0];
+//             temp[1] = intervals[i][1];
+//             (*returnSize) += 1;  
+//         }
+//     }
+//     result[*returnSize][0] = temp[0];
+//     result[*returnSize][1] = temp[1];
+//     *returnSize += 1;
+//     *returnColumnSizes = (int*)malloc(sizeof(int)*(*returnSize));
+//     for (int i = 0; i < *returnSize; i++){
+//         (*returnColumnSizes)[i] = 2;
+//     }
+//     return result;
+// }
+
+//插入排序
+void InsertSort(int* array, int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		//记录有序序列最后一个元素的下标
+		int end = i;
+		//待插入的元素
+		int tem = array[end + 1];
+		//单趟排
+		while (end >= 0)
+		{
+			//比插入的数大就向后移
+			if (tem < array[end])
+			{
+				array[end + 1] = array[end];
+				end--;
+			}
+			//比插入的数小，跳出循环
+			else
+			{
+				break;
+			}
+		}
+		//tem放到比插入的数小的数的后面
+		array[end  + 1] = tem;
+		//代码执行到此位置有两种情况:
+		//1.待插入元素找到应插入位置（break跳出循环到此）
+		//2.待插入元素比当前有序序列中的所有元素都小（while循环结束后到此）
+	}
+}
+
+
+ //区间排序用插入排序
+void InsertSort_section(struct section* array, int len)
+{
+	for (int i = 0; i < len-1; i++)
+	{
+		//记录有序序列最后一个元素的下标
+		int end = i;
+		//待插入的元素
+		int tem_left = array[end + 1].left;
+		int tem_right = array[end + 1].right;
+		//单趟排
+		while (end >= 0)
+		{
+			//比插入的数大就向后移
+			if (tem_left < array[end].left)
+			{
+				array[end + 1].left = array[end].left;
+				array[end + 1].right = array[end].right;
+				end--;
+			}
+			//比插入的数小，跳出循环
+			else
+			{
+				break;
+			}
+		}
+		//tem放到比插入的数小的数的后面
+		array[end  + 1].left = tem_left;
+		array[end  + 1].right = tem_right;
+
+		//代码执行到此位置有两种情况:
+		//1.待插入元素找到应插入位置（break跳出循环到此）
+		//2.待插入元素比当前有序序列中的所有元素都小（while循环结束后到此）
+	}
+}
+
+//合并区间
+void merge_section(struct section * array,int len)
+{
+	for(int i = 0;i<len-1;i++)
+	{
+		if(array[i].left<array[i+1].left<array[i].right)
+		{
+			if(array[i+1].right<array[i].right)
+			{
+				array[i+1].right=-1;
+				array[i+1].left=-1;
+			}
+			else if(array[i+1].right>array[i].right)
+			{
+				array[i].right=array[i+1].right;
+				array[i+1].right=-1;
+				array[i+1].left=-1;
+			}
+
+		}
+		else
+		{
+			printf("正确排序区间\n");
+		}
+	}
+}
