@@ -1,48 +1,90 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "nohead.h"
+#include "function.h"
 
 
 
 
-int main()
-{
-	int i;
-	struct node_st *list=NULL;
-	struct score_st tmp;
-	for(i=0;i<7;i++)
-	{
-		tmp.id = i;
-		snprintf(tmp.name,NAMESIZE,"stu%d",i);
-	        tmp.math = rand()% 100;
-		tmp.chinese = rand()%100;
+/*===============================================================================1、翻转矩阵===============================================================================*/
 
-		//list = list_insert(list,&tmp);
-		int ret;	
-		ret  = list_insert_double_pointer(&list,&tmp);
-		if(ret != 0)
-		{
-			exit(1);
-		}
-	}
-	
-	list_show(list);
-//	list_delete(&list);
-	printf("\n\n");
-//	list_show(list);
-	int id = 3;
-	struct score_st *ptr;
+// int main()
+// {
+// 	int i,j;
+// 	int arr[4][4];
+// 	arr_setup_2D(4,4,arr);
+// 	printf("打印随机生成的2维数组：\n");
+// 	for(i=0 ; i<4 ;i++)
+// 	{
+// 		for( j=0 ;j<4;j++)
+// 		{
+// 			printf("%15d",arr[i][j]);
+// 		}
+// 		printf("\n");
+// 	}
+// 	rotate(4,4,arr);
+// 	printf("打印翻转生成的2维数组：\n");
+// 	for(i=0 ; i<4 ;i++)
+// 	{
+// 		for(j=0 ;j<4;j++)
+// 		{
+// 			printf("%15d",arr[i][j]);
+// 		}
+// 		printf("\n");
+// 	}
 
-	ptr = list_find(list,id);
-	if(ptr == NULL)
-		printf("Can not find!\n");
-	else
-		printf("%d %s %d %d\n",ptr->id,ptr->name,ptr->math,ptr->chinese);
-	
-	list_show(list);
-	list_destroy(list);
-	exit(0);
+// 	return 0;
+// }
+
+/*===============================================================================2、零矩阵===============================================================================*/
+//编写一种算法，若M × N矩阵中某个元素为0，则将其所在的行与列清零。
+// int main()
+// {
+// 	int i,j;
+// 	int arr[3][4];
+// 	arr_setup_2D(3,4,arr);
+// 	//生成二维数组
+// 	printf("打印随机生成的2维数组：\n");
+// 	for(i=0 ; i<3 ;i++)
+// 	{
+// 		for( j=0 ;j<4;j++)
+// 		{
+// 			printf("%15d",arr[i][j]);
+// 		}
+// 		printf("\n");
+// 	}
+// 	//找到下标
+// 	struct array_2D_flag *flags_arr;
+// 	flags_arr = search_arr_2D(0,3,4,arr);
+// 	for (i = 0; i < 10;i++)
+// 	{
+// 		if (flags_arr[i].row != 1024)
+// 		{
+// 			printf("row:%d,col:%d\n",flags_arr[i].row,flags_arr[i].col);
+// 		}
+// 		else
+// 		{
+// 			break;
+// 		}
+		
+// 	}
+// 	//清零
+// 	zero_arr(flags_arr,3,4,arr);
+// 	printf("打印清0后的2维数组：\n");
+// 	for(i=0 ; i<3 ;i++)
+// 	{
+// 		for( j=0 ;j<4;j++)
+// 		{
+// 			printf("%15d",arr[i][j]);
+// 		}
+// 		printf("\n");
+// 	}
+
+// 	return 0;
+
+// } 
 
 
-}
+
+
+/*===============================================================================3、零矩阵===============================================================================*/

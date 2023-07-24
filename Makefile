@@ -1,8 +1,7 @@
 
-
 all:main
 
-main:main.o nohead.o
+main:main.o function.o
 	$(CC) $^ -o $@
 
 clean:

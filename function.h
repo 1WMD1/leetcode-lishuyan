@@ -1,38 +1,18 @@
 
-#ifndef LIST__H
-#define LIST__H
+#ifndef TEST__H
+#define TEST__H
+#define COUNT 100
+
+void arr_setup_1D(int n,int* array);
+void arr_setup_2D(int row,int col,int array[row][col]);
+void rotate(int row,int col,int array[row][col]);
 
 
+struct array_2D_flag{
+		int row;
+		int col;
+	};
+struct array_2D_flag* search_arr_2D(int flags,int row ,int col,int array[row][col]);
+void zero_arr(struct array_2D_flag* flags_arr,int row,int col,int array[row][col]);
 
-
-#define   NAMESIZE 32
-
-
-struct score_st
-{
-	int id;
-	char name[NAMESIZE];
-	int math;
-	int chinese;
-
-
-
-};
-
-struct node_st
-{
-	struct score_st data;
-	struct node_st *next;
-
-
-};
-
-struct node_st *list_insert(struct node_st *,struct score_st *);
-
-int  list_insert_double_pointer(struct node_st **,struct score_st *);
-
-void list_show(struct node_st *);
-int list_delete(struct node_st **);
-struct score_st * list_find(struct node_st *,int);
-void list_destroy(struct node_st *); 
 #endif

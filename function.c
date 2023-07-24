@@ -1,108 +1,111 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "nohead.h"
-
-
-
-struct node_st * list_insert(struct node_st *list,struct score_st *data)//头部插入
-{
-	struct node_st *new;
-	
-	new = malloc(sizeof(*new)); 	
-	if(new == NULL)
-		return NULL;
-
-	new->data = *data;
-	new->next = list;
-	list = new;
-
-	return list;
+#include <time.h>
+#include "function.h"
 
 
 
-}
 
-
-int   list_insert_double_pointer(struct node_st **list,struct score_st *data)//头部插入
-{
-        struct node_st *new;
-
-        new = malloc(sizeof(*new));
-        if(new == NULL)
-                return -1;
-
-        new->data = *data;
-        new->next = *list;
-        *list = new;
-
-        return 0;
-
-
-
-}
-
-void list_show(struct node_st *list)
-{
-	struct node_st *cur;
-	for(cur =list ;cur !=NULL ; cur = cur->next)
-	{
-		printf("%d %s %d %d \n",cur->data.id,cur->data.name,cur->data.math,cur->data.chinese);
-	}
-
-
-
-}
-
-#if 1
-int list_delete(struct node_st **list)
-{
-
-	struct node_st *cur;
-
-	if(*list == NULL)
-		return -1;
-
-
-	cur = *list;
-	*list = (*list)->next;
-	
-	free(cur);
-	return 0;	
-
-
-}
-
-
-
-struct score_st * list_find(struct node_st *list ,int id)
-{
-	struct node_st *cur;
-	for(cur = list;cur != NULL; cur = cur->next)
-	{
-		if(cur->data.id==id)
+//生成一个数组
+void arr_setup_1D(int n,int* array){
+		//设置随机数种子
+		srand(time(0));
+		//循环遍历给数组赋值
+		for(int i=0;i<n;i++)
 		{
-			printf("%d %s %d %d",cur->data.id,cur->data.name,cur->data.math,cur->data.chinese);
-			return &cur->data;
+			array[i] = rand()%100;	
+		}
+
+	
+}
+
+
+//生成二维数组
+void arr_setup_2D(int row,int col,int array[row][col]){
+		//设置随机数种子
+		srand(time(0));
+		//循环遍历给数组赋值
+		for(int i=0;i<row;i++)
+		{
+			for(int j=0 ; j<col; j++){
+				array[i][j] = rand()%100;	
+			}
+			
+		}
+
+	
+}
+
+
+//翻转矩阵
+void rotate(int row,int col,int array[row][col])
+{
+	int i,j;
+	for(i = 0;i<row;i++)//从原矩阵的第一列开始，自下而上依次输出，实现顺时针翻转90°
+	{
+		for(j = 0 ;j<col;j++){
+			array[col-j-1][i] = array[i][j];//
 		}
 	}
-	return NULL;
-
-
-
 }
 
-void list_destroy(struct node_st *list)
+
+
+
+
+
+
+//遍历二位数组
+
+
+struct array_2D_flag* search_arr_2D(int flags,int row ,int col,int array[row][col])
 {
-	struct node_st *cur;
+	struct array_2D_flag* flags_arr;
+	flags_arr = malloc(sizeof(struct array_2D_flag)*100);
+	int k = 0;
+	for(int i=0;i<row;i++){
+		for(int j=0;j<col;j++){
+			if(array[i][j]==flags){	
+				flags_arr[k].row=i;
+				flags_arr[k].col=j;
+				k++;
+			}
+			else
+			{
+				printf("第%d行，第%d不是我想要找的元素，他的数值是%d\n",i,j,array[i][j]);
+			}	
 
-	if(list == NULL)
-		return;
-	for(cur = list ; cur != NULL; cur = cur->next)
-	{
-		list = cur->next;
-		free(cur);
+		}
 	}
+	flags_arr[k].row=1024;
+	flags_arr[k].col=1024;
+	return flags_arr;
+
 
 }
-#endif
+
+
+
+//清理操作
+void zero_arr(struct array_2D_flag* flags_arr,int row,int col,int array[row][col])
+{
+	int i,j;
+	for(i=0;i<5;i++)
+	{
+		if(flags_arr[i].row != 1024)
+		{
+			int a = flags_arr[i].row;
+			int b = flags_arr[i].col;
+			for(j=0;j<col;j++)
+				array[a][j]=0;
+			for(j=0;j<row;j++)
+				array[j][b]=0;
+		}
+		else
+		{
+			break;
+		}
+	}
+	printf("清0操作完成！\n");
+
+}
