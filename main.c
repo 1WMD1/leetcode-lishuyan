@@ -38,51 +38,51 @@
 
 /*===============================================================================2、零矩阵===============================================================================*/
 //编写一种算法，若M × N矩阵中某个元素为0，则将其所在的行与列清零。
-// int main()
-// {
-// 	int i,j;
-// 	int arr[3][4];
-// 	arr_setup_2D(3,4,arr);
-// 	//生成二维数组
-// 	printf("打印随机生成的2维数组：\n");
-// 	for(i=0 ; i<3 ;i++)
-// 	{
-// 		for( j=0 ;j<4;j++)
-// 		{
-// 			printf("%15d",arr[i][j]);
-// 		}
-// 		printf("\n");
-// 	}
-// 	//找到下标
-// 	struct array_2D_flag *flags_arr;
-// 	flags_arr = search_arr_2D(0,3,4,arr);
-// 	for (i = 0; i < 10;i++)
-// 	{
-// 		if (flags_arr[i].row != 1024)
-// 		{
-// 			printf("row:%d,col:%d\n",flags_arr[i].row,flags_arr[i].col);
-// 		}
-// 		else
-// 		{
-// 			break;
-// 		}
+int main()
+{
+	int i,j;
+	int arr[3][4];
+	arr_setup_2D(3,4,arr);
+	//生成二维数组
+	printf("打印随机生成的2维数组：\n");
+	for(i=0 ; i<3 ;i++)
+	{
+		for( j=0 ;j<4;j++)
+		{
+			printf("%15d",arr[i][j]);
+		}
+		printf("\n");
+	}
+	//找到下标
+	struct array_2D_flag *flags_arr;
+	flags_arr = search_arr_2D(0,3,4,arr);
+	for (i = 0; i < 10;i++)
+	{
+		if (flags_arr[i].row != 1024)
+		{
+			printf("row:%d,col:%d\n",flags_arr[i].row,flags_arr[i].col);
+		}
+		else
+		{
+			break;
+		}
 		
-// 	}
-// 	//清零
-// 	zero_arr(flags_arr,3,4,arr);
-// 	printf("打印清0后的2维数组：\n");
-// 	for(i=0 ; i<3 ;i++)
-// 	{
-// 		for( j=0 ;j<4;j++)
-// 		{
-// 			printf("%15d",arr[i][j]);
-// 		}
-// 		printf("\n");
-// 	}
+	}
+	//清零
+	zero_arr(flags_arr,3,4,arr);
+	printf("打印清0后的2维数组：\n");
+	for(i=0 ; i<3 ;i++)
+	{
+		for( j=0 ;j<4;j++)
+		{
+			printf("%15d",arr[i][j]);
+		}
+		printf("\n");
+	}
 
-// 	return 0;
+	return 0;
 
-// } 
+} 
 
 
 
