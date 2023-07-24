@@ -7,18 +7,18 @@
 
 
 //生成一个数组
-void arr_setup_1D(int n,int* array){
+void arr_setup_1D(int len,int* array){
 
 	//自动赋值
 		// //设置随机数种子
 		// srand(time(0));
 		// //循环遍历给数组赋值
-		// for(int i=0;i<n;i++)
+		// for(int i=0;i<len;i++)
 		// {
 		// 	array[i] = rand()%100;	
 		// }
 	//手动赋值
-		for (int i = 0; i < n; i++) 
+		for (int i = 0; i < len; i++) 
 		{
         	printf("请输入第 %d 个元素的值：", i + 1);
         	scanf("%d", &array[i]);
@@ -74,14 +74,14 @@ void rotate(int row,int col,int array[row][col])
 //遍历二位数组
 
 
-struct array_2D_flag* search_arr_2D(int flags,int row ,int col,int array[row][col])
+struct array_2D_flag* search_arr_2D(int target,int row ,int col,int array[row][col])
 {
 	struct array_2D_flag* flags_arr;
 	flags_arr = malloc(sizeof(struct array_2D_flag)*100);
 	int k = 0;
 	for(int i=0;i<row;i++){
 		for(int j=0;j<col;j++){
-			if(array[i][j]==flags){	
+			if(array[i][j]==target){	
 				flags_arr[k].row=i;
 				flags_arr[k].col=j;
 				k++;
@@ -128,12 +128,12 @@ void zero_arr(struct array_2D_flag* flags_arr,int row,int col,int array[row][col
 
 
 //一维数组寻找中心索引
-int center_index_array(int* array, int n)
+int center_index_array(int* array, int len)
 {
     int i, totalarray = 0, leftarray = 0;
-    for (i = 0; i < n; i++)
+    for (i = 0; i < len; i++)
         totalarray += array[i] ;
-    for (i = 0; i < n; i++)
+    for (i = 0; i < len; i++)
     {
         if (leftarray * 2 + array[i] == totalarray)
             return i;
@@ -141,3 +141,97 @@ int center_index_array(int* array, int n)
     }
     return -1;
 }
+
+
+
+
+// 顺序查找法
+int find_Seq(int *array, int len, int target){
+	for (int i = 0; i < len; i++){
+		if (array[i] == target){
+			return i;
+		}
+	}
+	return -1;
+}
+
+
+//二分查找
+int binarySearch(int *array, int len, int target){
+	int low = 0;
+	int high = len - 1;
+	int middle;
+ 
+	while (low <= high){
+		middle = (low + high) / 2;
+		if (array[middle] < target){
+			low = middle + 1;
+		}else if (array[middle] > target){
+			high = middle - 1;
+		}else{
+			printf("找到数值,位置为 %d \n", middle);
+			return middle;
+		 }
+	}
+	return -1;
+ 
+}
+
+//插值查找
+int insertSearch(int *array, int len, int target)
+{
+    int low = 0, mid, high = len - 1;
+
+    while (low <= high)
+    {
+        mid = low + (target - array[low]) / (array[high] - array[low]);
+        if (target < array[mid])
+        {
+            high = mid - 1;//是mid-1，因为mid已经比较过了
+        }
+        else if (target > array[mid])
+        {
+            low = mid + 1;
+        }
+        else
+        {
+            return mid;
+        }
+    }
+    return -1;
+}
+ 
+
+//往一个一维数组中顺序插入一个元素
+ int insert_target(int* array,int len ,int target)
+ {
+ 	for (int i = 0; i < len; i++)
+ 	{
+ 		if ((target > array[i])&&(target < array[i+1]))
+ 		{
+ 			for (int j = len -1; j > i; j--)
+ 			{
+ 				array[j+1] = array[j];	
+ 			}
+ 			array[i] = target;
+ 			return 0;
+ 		}
+ 		else if(target < array[0])
+ 		{
+ 			
+ 			for (int k = len-1; k > 0; k--)
+ 			{
+ 				array[k+1] = array[k];	
+ 			}
+ 			array[0] = target;
+ 			return 0; 
+ 		}
+ 		else if(target > array[len - 1])
+ 		{
+ 			array[len] = target;
+ 			return 0;
+ 		}
+
+ 	}
+ 	return -1;
+ }

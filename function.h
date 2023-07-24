@@ -5,14 +5,24 @@
 
 /*===============================================================================0、通用函数===============================================================================*/
 //数组相关
-void arr_setup_1D(int n,int* array);
-void arr_setup_2D(int row,int col,int array[row][col]);
-struct array_2D_flag* search_arr_2D(int flags,int row ,int col,int array[row][col]);//遍历二位数组，找到某个数值，并返回给主函数
+void arr_setup_1D(int n,int* array);//生成一维数组
+int insert_target(int* array,int len ,int target);//在一维数组中插入一个元素
+
+void arr_setup_2D(int row,int col,int array[row][col]);//生成二维数组
+struct array_2D_flag* search_arr_2D(int flags,int row ,int col,int array[row][col]);//遍历二位数组，找到（顺序查找）某个数值，并返回给主函数
+
+
+//查找
+int find_Seq(int *array, int len, int target);//顺序查找
+int binarySearch(int *array, int len, int target);//二分法查找，前提数组或者其他数据结构是顺序的
+int insertSearch(int *array, int len, int target);//插值查找，依旧是顺序查找，但是效率要比二分法快些，提供了自适应算法
+//斐波那契查找（预留）
+
 
 
 
 /*===============================================================================1、翻转矩阵===============================================================================*/
-void rotate(int row,int col,int array[row][col]);
+void rotate(int row,int col,int array[row][col]);//翻转矩阵
 
 
 
