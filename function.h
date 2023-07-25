@@ -57,4 +57,8 @@ struct section
 void InsertSort_section(struct section* array, int len);//区间插入排序
 void merge_section(struct section * array,int len);//合并区间
 
+
+/*===============================================================================6、最长公共前缀===============================================================================*/
+char * longestCommonPrefix(char ** strs, int strsSize);
+
 #endif

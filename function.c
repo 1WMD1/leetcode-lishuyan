@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "function.h"
-
+#include <string.h>
 
 
 
@@ -450,13 +450,13 @@ void SelectSort(int* array, int len)
 				maxi = i;
 			}
 		}
-		Swap(&array[mini], &array[begin]);
+		swap(&array[mini], &array[begin]);
 		//如果maxi = begin，上一步交换了begin和mini的值，会影响maxi指向的值
 		if (maxi == begin)
 		{
 			maxi = mini;
 		}
-		Swap(&array[maxi], &array[end]);//将效率加快一倍
+		swap(&array[maxi], &array[end]);//将效率加快一倍
 		begin++;
 		end--;
 	}
@@ -496,27 +496,31 @@ void BubbleSort(int* array, int len)
 }
 
 //最长公共前缀
-char *longestCommonPrefix(char **strs, int strsSize) {
-    if (strsSize == 0) {
+char * longestCommonPrefix(char ** strs, int strsSize)
+{
+    if(strsSize==0){
         return "";
     }
-    
-    // 取第一个字符串作为初始的最长公共前缀
-    char *prefix = strs[0];
-    
-    // 遍历数组中的每个字符串
-    for (int i = 1; i < strsSize; i++) {
-        // 当前字符串与最长公共前缀比较，找到最长公共前缀
-        while (strncmp(prefix, strs[i], strlen(prefix)) != 0) {
-            // 最长公共前缀与当前字符串不匹配，缩短最长公共前缀长度
-            prefix[strlen(prefix) - 1] = '\0';
-        }
-        
-        // 如果最长公共前缀为空，则直接返回空字符串
-        if (strlen(prefix) == 0) {
-            return "";
-        }
-    }
-    
+    int pre;
+    char *prefix; 
+    printf("%ld\n",strlen(strs[0]));
+    printf("%s\n", strs[0]);
+    printf("%c\n", strs[0][1]);
+    for(int i=0;i<strlen(strs[0]);i++){
+        for(int j=1;j<strsSize;j++){
+            if(strs[0][i]!=strs[j][i]){
+                // strs[0][i]='\0';//不能被修改，否则引起CORE DUMPED 
+                // return strs[0];
+                pre = i;
+                printf("%d\n", i);
+                goto exit;
+        	}
+    	}
+	}
+
+    exit:
+    prefix = (char*)malloc(sizeof(char) * (pre + 1)); // 动态分配内存空间
+    strncpy(prefix, strs[0], pre); // 将最长公共前缀拷贝到动态分配的内存空间
+    prefix[pre] = '\0'; // 在最长公共前缀的结尾添加空字符
     return prefix;
 }
