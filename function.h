@@ -22,7 +22,7 @@ int insertSearch(int *array, int len, int target);//插值查找，依旧是顺�
 
 //排序
 void InsertSort(int* array, int len);// 插入排序
-// 希尔排序
+void ShellSort(int* array, int len);// 希尔排序
 // 选择排序
 // 冒泡排序
 // 堆排序

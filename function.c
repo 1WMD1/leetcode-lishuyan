@@ -397,3 +397,35 @@ void merge_section(struct section * array,int len)
 		}
 	}
 }
+
+
+
+//希尔排序
+void ShellSort(int* array, int len)
+{
+	int gap = len;
+	while (gap>1)
+	{
+		//每次对gap折半操作
+		gap = gap / 2;
+		//单趟排序
+		for (int i = 0; i < len - gap; ++i)
+		{
+			int end = i;
+			int tem = array[end + gap];
+			while (end >= 0)
+			{
+				if (tem < array[end])
+				{
+					array[end + gap] = array[end];
+					end -= gap;
+				}
+				else
+				{
+					break;
+				}
+			}
+			array[end + gap] = tem;
+		}
+	}
+}
