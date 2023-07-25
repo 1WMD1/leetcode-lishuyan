@@ -494,3 +494,29 @@ void BubbleSort(int* array, int len)
 		--end;
 	}
 }
+
+//最长公共前缀
+char *longestCommonPrefix(char **strs, int strsSize) {
+    if (strsSize == 0) {
+        return "";
+    }
+    
+    // 取第一个字符串作为初始的最长公共前缀
+    char *prefix = strs[0];
+    
+    // 遍历数组中的每个字符串
+    for (int i = 1; i < strsSize; i++) {
+        // 当前字符串与最长公共前缀比较，找到最长公共前缀
+        while (strncmp(prefix, strs[i], strlen(prefix)) != 0) {
+            // 最长公共前缀与当前字符串不匹配，缩短最长公共前缀长度
+            prefix[strlen(prefix) - 1] = '\0';
+        }
+        
+        // 如果最长公共前缀为空，则直接返回空字符串
+        if (strlen(prefix) == 0) {
+            return "";
+        }
+    }
+    
+    return prefix;
+}
