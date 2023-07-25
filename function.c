@@ -409,13 +409,13 @@ void ShellSort(int* array, int len)
 		//每次对gap折半操作
 		gap = gap / 2;
 		//单趟排序
-		for (int i = 0; i < len - gap; ++i)
+		for (int i = 0; i < len - gap; i++)
 		{
 			int end = i;
 			int tem = array[end + gap];
 			while (end >= 0)
 			{
-				if (tem < array[end])
+				if (tem < array[end])//利用了插入排序的思想
 				{
 					array[end + gap] = array[end];
 					end -= gap;
@@ -427,5 +427,70 @@ void ShellSort(int* array, int len)
 			}
 			array[end + gap] = tem;
 		}
+	}
+}
+
+
+//优化选择排序
+void SelectSort(int* array, int len)
+{
+	int begin = 0;
+	int end = len - 1;
+	while (begin < end)
+	{
+		int mini = begin, maxi = begin;
+		for (int i = begin + 1; i <= end; i++)
+		{
+			if (array[i] < array[mini])
+			{
+				mini = i;
+			}
+			if (array[i] > array[maxi])
+			{
+				maxi = i;
+			}
+		}
+		Swap(&array[mini], &array[begin]);
+		//如果maxi = begin，上一步交换了begin和mini的值，会影响maxi指向的值
+		if (maxi == begin)
+		{
+			maxi = mini;
+		}
+		Swap(&array[maxi], &array[end]);//将效率加快一倍
+		begin++;
+		end--;
+	}
+}
+//交换函数
+void swap(int* a, int* b)
+{
+	int tem = *a;
+	*a = *b;
+	*b = tem;
+}
+
+
+//冒泡排序
+void BubbleSort(int* array, int len)
+{
+	int end = len;
+	while (end)
+	{
+		int flag = 0;
+		for (int i = 1; i < end; ++i)
+		{
+			if (array[i - 1] > array[i])
+			{
+				int tem = array[i];
+				array[i] = array[i - 1];
+				array[i - 1] = tem;
+				flag = 1;
+			}
+		}
+		if (flag == 0)
+		{
+			break;
+		}
+		--end;
 	}
 }
