@@ -579,3 +579,18 @@ char * longestPalindrome(char * s){//”abdab“
     return s + begin;//防止第前面的元素不是回文子串的一部分
 }
 
+
+//递归的方式
+char * reverse_string(char* arr)
+{
+	int len = strlen(arr);
+	char tmp = *arr;
+	*arr = *(arr+len-1);
+ 
+	*(arr+len-1) = '\0';
+	if(strlen(arr+1)>=2)
+		reverse_string(arr+1);
+ 
+	*(arr+len-1) = tmp;
+	return arr;
+}

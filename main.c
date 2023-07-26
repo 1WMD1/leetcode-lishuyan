@@ -358,13 +358,13 @@
 // 
 // 
 
-int main()
-{
-	char str_array[]="babad";
-	char * strs; 
-	strs = longestPalindrome(str_array);
-	printf("最长回文子串：%s\n", strs);
-}
+// int main()
+// {
+// 	char str_array[]="babad";
+// 	char * strs; 
+// 	strs = longestPalindrome(str_array);
+// 	printf("最长回文子串：%s\n", strs);
+// }
 
 
 
@@ -422,7 +422,15 @@ int main()
 
 
 
-
+int main()
+{
+	char str_array[]="the sky is blue";
+	printf("str_array:%s\n", str_array);
+	char * str;
+	str = reverse_string(str_array);
+	printf("reverse_string:%s\n",str);
+ 	return 0;
+}
 
 
 
