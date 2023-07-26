@@ -594,3 +594,35 @@ char * reverse_string(char* arr)
 	*(arr+len-1) = tmp;
 	return arr;
 }
+
+
+int strstr1(char ** str_array,int len)
+{
+	int j =0;
+	printf("%c\n",str_array[0][1]);
+	printf("%c\n",str_array[1][0]);
+	printf("%s\n",str_array[1]);
+
+	if(str_array[1][0]=='\0')
+	{
+		return -1;
+	}
+	printf("%s\n",str_array[0]);
+	for(int i =0 ;i<strlen(str_array[0]);i++)
+	{
+		// for(int j =0 ;j<strlen(str_array[1]);j++)
+		// {
+			
+
+			if(str_array[1][j] == str_array[0][i])
+			{
+				j++;
+				if(str_array[1][j]=='\0')
+					break;
+			}
+
+		// }
+	}
+	return j;
+
+}

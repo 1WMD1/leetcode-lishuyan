@@ -422,15 +422,15 @@
 
 
 
-int main()
-{
-	char str_array[]="the sky is blue";
-	printf("str_array:%s\n", str_array);
-	char * str;
-	str = reverse_string(str_array);
-	printf("reverse_string:%s\n",str);
- 	return 0;
-}
+// int main()
+// {
+// 	char str_array[]="the sky is blue";
+// 	printf("str_array:%s\n", str_array);
+// 	char * str;
+// 	str = reverse_string(str_array);
+// 	printf("reverse_string:%s\n",str);
+//  	return 0;
+// }
 
 
 
@@ -470,7 +470,22 @@ int main()
 
 
 
+int main()
+{
+	int len;
+	char* str_array[]={"sadbutsad\0","sad\0"};
+	for (int i = 0; i < 2; i++)
+	{
+		printf("str_array[%d]%s\n",i,str_array[i]);
+	}
 
+	int  flags;
+
+	flags = strstr1(str_array,2);
+
+	printf("下标:%d\n", flags);
+
+}
 
 
 
