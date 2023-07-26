@@ -61,4 +61,6 @@ void merge_section(struct section * array,int len);//合并区间
 /*===============================================================================6、最长公共前缀===============================================================================*/
 char * longestCommonPrefix(char ** strs, int strsSize);
 
+
+char * longestPalindrome(char * s);
 #endif

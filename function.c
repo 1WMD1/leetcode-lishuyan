@@ -3,7 +3,7 @@
 #include <time.h>
 #include "function.h"
 #include <string.h>
-
+#include <stdbool.h>
 
 
 //生成一个数组
@@ -524,3 +524,58 @@ char * longestCommonPrefix(char ** strs, int strsSize)
     prefix[pre] = '\0'; // 在最长公共前缀的结尾添加空字符
     return prefix;
 }
+
+//最长回文子串（动态规划解决）
+char * longestPalindrome(char * s){//”abdab“
+    //回文串结束下标
+    int j;
+    //最长回文串长度
+    int maxLength = 1;
+    //回文串起始位置
+    int begin = 0;
+    int len = strlen(s);
+    // dp[i][j] 表示 s[i..j] 是否是回文串
+    bool dp[len][len];
+
+    //0.初始化：所有长度为 1 的子串都是回文串 
+    for (int i = 0; i < len; i++) { 
+        dp[i][i] = true; 
+    }
+
+    //1.长度为 1 的一定是回文串，故长度从 2 开始
+    for(int l = 2; l <= len; l++){
+        //2.起始位置从 0 开始
+        for(int i = 0; i < len; i++){
+            ///结束位置
+            j = i + l - 1;
+
+            //3.注意数组越界，注意 等于
+            if (j >= len) {
+                break;
+            }
+
+            //回文串首尾字母不相同
+            if (s[i] != s[j]) {
+                dp[i][j] = false;
+            } else {
+                //回文串小于 3 个字符（ 3 个字符内首尾相等即为回文串）
+                if (j - i < 3) {
+                    dp[i][j] = true;
+                } else {
+                    //回文串大于两个字符
+                    dp[i][j] = dp[i + 1][j - 1];//dp[1][4]=dp[2][3]动态规划和转移，前者的数值由后者决定
+                }
+            }
+
+            //4.只要 dp[i][L] == true 成立，就表示子串 s[i:L] 是回文，此时记录回文 长度 和 起始位置
+            if (dp[i][j] && l > maxLength) {
+                maxLength = l;
+                begin = i;
+            }
+        }
+    }
+    //设置结束位置
+    s[begin + maxLength] = '\0';
+    return s + begin;//防止第前面的元素不是回文子串的一部分
+}
+

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "function.h"
+#include <stdbool.h>
 
 
 
@@ -302,20 +303,20 @@
 
 
 
-int main() 
-{
-	char *strs[] = {"floee", "flooow", "fllww"};//非整数直接这样赋值就行了
-	printf("%ld\n",strlen(strs[0]));
+// int main() 
+// {
+// 	char *strs[] = {"floee", "flooow", "fllww"};//非整数直接这样赋值就行了
+// 	printf("%ld\n",strlen(strs[0]));
  
-    int strsSize = sizeof(strs) / sizeof(strs[0]);
-    printf("strsSize：%d\n", strsSize);
+//     int strsSize = sizeof(strs) / sizeof(strs[0]);
+//     printf("strsSize：%d\n", strsSize);
 
-    char *result = longestCommonPrefix(strs, strsSize);
-    printf("最长公共前缀：%s\n", result);
+//     char *result = longestCommonPrefix(strs, strsSize);
+//     printf("最长公共前缀：%s\n", result);
     
-    free(result);
-    return 0;
-}
+//     free(result);
+//     return 0;
+// }
 
 
 
@@ -357,6 +358,13 @@ int main()
 // 
 // 
 
+int main()
+{
+	char str_array[]="babad";
+	char * strs; 
+	strs = longestPalindrome(str_array);
+	printf("最长回文子串：%s\n", strs);
+}
 
 
 
