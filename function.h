@@ -12,20 +12,9 @@ void arr_setup_2D(int row,int col,int array[row][col]);//生成二维数组
 struct array_2D_flag* search_arr_2D(int flags,int row ,int col,int array[row][col]);//遍历二位数组，找到（顺序查找）某个数值，并返回给主函数
 
 
-//查找
-int find_Seq(int *array, int len, int target);//顺序查找
-int binarySearch(int *array, int len, int target);//二分法查找，前提数组或者其他数据结构是顺序的
-int insertSearch(int *array, int len, int target);//插值查找，依旧是顺序查找，但是效率要比二分法快些，提供了自适应算法
-//斐波那契查找（预留）
 
 
 
-//排序
-void InsertSort(int* array, int len);// 插入排序
-void ShellSort(int* array, int len);// 希尔排序
-void swap(int* a, int* b);//交换函数
-void SelectSort(int* array, int len);// 选择排序
-void BubbleSort(int* array, int len);// 冒泡排序
 
 //链表（虾米那两种最常用的链表，其他不怎么用）
 //无头节点单向非循环链表：在链表中作为其他数据结构的子结构
@@ -88,6 +77,94 @@ ListNode* ListFind(ListNode* pHead, ListDateType x);
 void ListInsert(ListNode* pos, ListDateType x);
 //删除pos位置
 void ListErase(ListNode* pos);
+
+
+
+
+//栈
+typedef struct
+{
+	int stack[MaxStackSize]; //可以根据不同的数据类型进行更换，MaxStackSize定义了栈大小
+	int top; //定义此时栈顶元素的位置(数组下标)，每次入栈pos会自增1,再把相应的元素入栈
+}SequenceStack;
+
+
+//栈的初始化
+void StackInit(SequenceStack *S);
+//判断此时栈是否为空
+bool JudgeStackEmpty(SequenceStack *S); //为空返回true，非空返回false
+//进栈操作
+void StackPush(SequenceStack *S,int x);
+//出栈操作（删除栈顶元素，用变量x返回）
+int StackPop(SequenceStack *S);
+//取栈顶元素
+int GetStackTop(SequenceStack *S);
+
+
+
+
+
+
+
+//队列
+typedef int QDataType;
+typedef struct QueueNode
+{
+	struct QueueNode* next;
+	QDataType data;
+}QNode;
+ 
+typedef struct Queue
+{
+	QNode* head;
+	QNode* tail;
+}Queue;
+ 
+void QueueInit(Queue* pq);                //队列的初始化
+void QueueDestroy(Queue* pq);             //队列的销毁
+void QueuePush(Queue* pq, QDataType x);   //插入数据
+void QueuePop(Queue* pq);                 //删除数据
+bool QueueEmpty(Queue* pq);               //队列的判空
+QDataType QueueFront(Queue* pq);          //队列头部数据
+QDataType QueueBck(Queue* pq);            //队列尾部数据
+int QueueSize(Queue* pq);                 //队列的大小
+
+
+
+
+
+
+//查找
+int find_Seq(int *array, int len, int target);//顺序查找
+int binarySearch(int *array, int len, int target);//二分法查找，前提数组或者其他数据结构是顺序的
+int insertSearch(int *array, int len, int target);//插值查找，依旧是顺序查找，但是效率要比二分法快些，提供了自适应算法
+//斐波那契查找（预留）
+
+
+
+//排序
+void InsertSort(int* array, int len);// 插入排序
+void ShellSort(int* array, int len);// 希尔排序
+void swap(int* a, int* b);//交换函数
+void SelectSort(int* array, int len);// 选择排序
+void BubbleSort(int* array, int len);// 冒泡排序
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

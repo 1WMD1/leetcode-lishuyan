@@ -801,6 +801,7 @@ void SListInsertAfter(SListNode* pos, SLTDateType x)
 	pos->next = newnode;
 }
 
+
 // 单链表删除pos位置之后的值
 void SListEraseAfter(SListNode* pos)
 {
@@ -819,4 +820,305 @@ void SListEraseAfter(SListNode* pos)
 		cur = NULL;
 	}
  
+}
+
+
+//初始化双向链表
+ListNode* ListInit(ListNode* phead)
+{
+	phead = BuyList(0);
+	phead->next = phead;
+	phead->prev = phead;
+	return phead;
+}
+
+//双向链表打印
+void ListPrint(ListNode* phead)
+{
+	ListNode* cur = phead->next;
+	while (cur != phead)
+	{
+		printf("%d ", cur->val);
+		cur = cur->next;
+	}
+ 
+}
+
+// 创建返回链表的头结点
+ListNode* BuyList(ListDateType x)
+{
+	ListNode* newnode = (ListNode*)malloc(sizeof(ListNode));
+	if (newnode == NULL)
+	{
+		printf("BuyList fail\n");
+		exit(-1);
+	}
+	newnode->val = x;
+	newnode->next = NULL;
+	newnode->prev = NULL;
+    return newnode;
+}
+
+//双向链表尾插
+void ListPushBack(ListNode* phead, ListDateType x)
+{
+	assert(phead);
+	ListNode* newnode = BuyList(x);
+	ListNode* tail = phead->prev;
+ 
+	tail->next = newnode;
+	phead->prev = newnode;
+	newnode->next = phead;
+	newnode->prev = tail;
+}
+
+//双向链表尾删
+void ListPopBack(ListNode* phead)
+{
+	assert(phead->next != phead);
+	ListNode* tail = phead->prev;
+	ListNode* prev = tail->prev;
+	phead->prev = prev;
+	prev->next = phead;
+	free(tail);
+	tail = NULL;
+}
+
+//双向链表头插
+void ListPushFront(ListNode* phead, ListDateType x)
+{
+	assert(phead);
+	ListNode* newnode = BuyList(x);
+	ListNode* head = phead->next;
+ 
+	phead->next = newnode;
+	head->prev = newnode;
+	newnode->next = head;
+	newnode->prev = phead;
+}
+
+//双向链表头删
+void ListPopFront(ListNode* phead)
+{
+	assert(phead);
+	assert(phead->next != phead);
+ 
+	ListNode* head = phead->next;
+	ListNode* next = head->next;
+ 
+	phead->next = next;
+	next->prev = phead;
+	free(head);
+	head = NULL;
+}
+
+//双向链表查找
+ListNode* ListFind(ListNode* phead, ListDateType x)
+{
+	assert(phead);
+	assert(phead->next != phead);
+	ListNode* pos = phead->next;
+	while (pos != phead)
+	{
+		if (pos->val == x)
+		{
+			return pos;
+		}
+		pos = pos->next;
+	}
+	return NULL;
+}
+
+//在pos之前插入
+void ListInsert(ListNode* pos, ListDateType x)
+{
+	assert(pos);
+	ListNode* newnode = BuyList(x);
+	ListNode* prev = pos->prev;
+ 
+	prev->next = newnode;
+	pos->prev = newnode;
+	newnode->prev = prev;
+	newnode->next = pos;
+}
+
+//删除pos位置
+void ListErase(ListNode* pos)
+{
+	assert(pos);
+	ListNode* prev = pos->prev;
+	ListNode* next = pos->next;
+	prev->next = next;
+	next->prev = prev;
+	free(pos);
+	pos = NULL;
+}
+
+//栈的初始化
+void StackInit(SequenceStack *S)
+{
+	S->top = -1; //让栈顶指针移动至-1位(最底)
+}
+
+
+//判断此时栈是否为空
+bool JudgeStackEmpty(SequenceStack *S) //为空返回true，非空返回false
+{
+	if(S->top == -1)  // 判断此时栈顶指针是否和栈底指针是否重合(栈底默认为-1)
+		return true;
+	else
+		return false;
+}
+
+//进栈操作
+void StackPush(SequenceStack *S,int x)
+{
+	if(S->top == MaxStackSize - 1){  
+		printf("此时栈满");  //若栈满继续入栈会出现上溢问题
+	}
+	else{
+		S->top++;  //栈顶指针往上移动一格
+		S->stack[S->top] = x;   //将元素x存放在栈顶指针所指单元中
+		printf("入栈成功");
+	}
+}
+
+//出栈操作（删除栈顶元素，用变量x返回）
+int StackPop(SequenceStack *S)
+{
+	if(S->top == -1){
+		printf("此时为空栈，无法继续出栈"); //若栈空仍继续出栈，会出现下溢问题
+		return -1;//-1表示出栈失败
+	}
+	int x = S->stack[S->top]; 
+	S->top--; //栈顶指针下移，表示出栈了一个元素
+	return x;
+}
+
+
+//取栈顶元素
+int GetStackTop(SequenceStack *S)
+{
+	if(S->top == -1)  //判断此时是否为空
+		return -1; //-1表示此时无法取栈顶元素（可以根据题目要求进行调整)
+	int x = S->stack[S->top]; //类似于出栈存x的操作，但无需动栈顶指针
+	return x;
+}
+
+
+
+
+
+
+//队列的初始化
+void QueueInit(Queue* pq)
+{
+	assert(pq);
+	pq->head = pq->tail = NULL;
+}
+
+
+//队列的销毁
+void QueueDestroy(Queue* pq)
+{
+	assert(pq);
+ 
+	QNode* Dest = pq->head;
+	while (Dest)
+	{
+		QNode* temp = Dest->next;
+		free(Dest);
+		Dest = temp;
+	}
+	pq->head = pq->tail = NULL;
+}
+
+
+//插入数据
+void QueuePush(Queue* pq, QDataType x)
+{
+	assert(pq);
+	//创建一个节点
+	QNode* newnode = (QNode*)malloc(sizeof(QNode));
+	if (newnode == NULL)
+	{
+		printf("malloc fail\n");
+		exit(-1);
+	}
+	newnode->data = x;
+	newnode->next = NULL;
+	//判断pq是不是一个空结点
+	//如果是 则将newnode置为当前队列的第一个结点
+	//如果不是  则将newnode链接到pq的下一个位置
+	if (pq->tail == NULL)
+	{   //两个节点都指向newnode 表示此时队列中就一个元素
+		pq->head = pq->tail = newnode;
+	}
+	else 
+	{
+		//1.将newnode链接到tail的后面
+		pq->tail->next = newnode;
+		//2.将newnode置换为新的tail
+		pq->tail = newnode;
+	}
+}
+
+//删除数据
+void QueuePop(Queue* pq)
+{
+	assert(pq);
+	assert(!QueueEmpty(pq));
+	//额外判断一下，解决如果仅剩一个结点了，pop的话导致tail为野指针
+	if (pq->head->next == NULL)
+	{
+		free(pq->head);
+		pq->head = pq->tail = NULL;
+	}
+	else
+	{
+		QNode* next = pq->head->next;
+		free(pq->head);
+		pq->head = next;
+	}
+}
+
+
+//队列的判空
+bool QueueEmpty(Queue* pq)
+{
+	assert(pq);
+	return pq->head == NULL;
+}
+
+
+//队列头部数据
+QDataType QueueFront(Queue* pq)
+{
+	assert(pq);
+	assert(!QueueEmpty(pq));
+	return pq->head->data;
+}
+
+
+ //队列尾部数据
+QDataType QueueBck(Queue* pq)
+{
+	assert(pq);
+	assert(!QueueEmpty(pq));
+	return pq->tail ->data;
+}
+
+
+ //队列的大小
+int QueueSize(Queue *pq)
+{
+	assert(pq);
+	int count = 0;
+	QNode* cur = pq->head;
+	while (cur)
+	{
+		cur = cur->next;
+		count++;
+	}
+	return count;
 }
