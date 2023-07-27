@@ -424,10 +424,10 @@
 
 // int main()
 // {
-// 	char str_array[]="the sky is blue";
+// 	char str_array[]="the sky is blue ";
 // 	printf("str_array:%s\n", str_array);
 // 	char * str;
-// 	str = reverse_string(str_array);
+// 	str = reverse_word(str_array);
 // 	printf("reverse_string:%s\n",str);
 //  	return 0;
 // }
@@ -470,22 +470,22 @@
 
 
 
-int main()
-{
-	int len;
-	char* str_array[]={"sadbutsad\0","sad\0"};
-	for (int i = 0; i < 2; i++)
-	{
-		printf("str_array[%d]%s\n",i,str_array[i]);
-	}
+// int main()
+// {
+// 	int len;
+// 	char* str_array[]={"sadbutsad\0","sad\0"};
+// 	for (int i = 0; i < 2; i++)
+// 	{
+// 		printf("str_array[%d]%s\n",i,str_array[i]);
+// 	}
 
-	int  flags;
+// 	int  flags;
 
-	flags = strstr1(str_array,2);
+// 	flags = strstr1(str_array,2);
 
-	printf("下标:%d\n", flags);
+// 	printf("下标:%d\n", flags);
 
-}
+// }
 
 
 
@@ -521,6 +521,16 @@ int main()
 // 来源：力扣（LeetCode）
 // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
+
+// int main()
+// {
+// 	char str_array[]="the sky is blue";
+// 	printf("str_array:%s\n", str_array);
+// 	char * str;
+// 	str = reverse_string(str_array);
+// 	printf("reverse_string:%s\n",str);
+//  	return 0;
+// }
 
 
 
@@ -957,23 +967,46 @@ int main()
 
 
 
+/* 测试链表*/
+
+int main()
+{
+	int i;
+	SLTDateType x = 5;
+	// 动态申请一个节点
+	SListNode* mylist;
+	mylist = BuySListNode(5);
+	SListPrint(mylist);
+	printf("===============================\n");
+	// 单链表尾插
+	SListPushBack(mylist, 4);
+	SListPrint(mylist);
+	printf("===============================\n");
+	printf("===============================\n");
+	SListPushBack(mylist, 6);
+	SListPushBack(mylist, 7);	
+	SListPrint(mylist);
+	printf("===============================\n");
+	printf("===============================\n");
+	printf("===============================\n");
+	SListPushFront(&mylist, 1);//标准双重指针
+	SListPrint(mylist);
+	printf("===============================\n");
+	printf("===============================\n");
+	printf("===============================\n");
+	SListPopBack(&mylist);
+	SListPrint(mylist);
+	printf("===============================\n");
+	printf("===============================\n");
+	printf("===============================\n");
+	SListPopFront(&mylist);
+	SListPrint(mylist);
+
+return 0;	
+}
 
 
 
 
-
-
-
-
-/*===============================================================================9、实现 strStr()===============================================================================*/
-
-
-/*===============================================================================9、实现 strStr()===============================================================================*/
-
-
-/*===============================================================================9、实现 strStr()===============================================================================*/
-
-
-/*===============================================================================9、实现 strStr()===============================================================================*/
 
 

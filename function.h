@@ -27,7 +27,67 @@ void swap(int* a, int* b);//交换函数
 void SelectSort(int* array, int len);// 选择排序
 void BubbleSort(int* array, int len);// 冒泡排序
 
+//链表（虾米那两种最常用的链表，其他不怎么用）
+//无头节点单向非循环链表：在链表中作为其他数据结构的子结构
 
+// 1、无头+单向+非循环链表增删查改实现
+typedef int SLTDateType;
+typedef struct SListNode
+{
+ SLTDateType data;
+ struct SListNode* next;
+}SListNode;
+ 
+// 动态申请一个节点
+SListNode* BuySListNode(SLTDateType x);
+// 单链表打印
+void SListPrint(SListNode* plist);
+// 单链表尾插
+void SListPushBack(SListNode* pplist, SLTDateType x);
+// 单链表的头插
+void SListPushFront(SListNode** pplist, SLTDateType x);
+// 单链表的尾删
+void SListPopBack(SListNode** pplist);
+// 单链表头删
+void SListPopFront(SListNode** pplist);
+// 单链表查找
+SListNode* SListFind(SListNode* plist, SLTDateType x);
+// 单链表在pos位置之后插入x
+void SListInsertAfter(SListNode* pos, SLTDateType x);
+// 单链表删除pos位置之后的值
+void SListEraseAfter(SListNode* pos);
+
+
+//带头节点双向循环链表：一般单独存储数据。在内核中常见到；
+// 2、带头+双向+循环链表增删查改实现
+typedef int ListDateType;
+typedef struct ListNode 
+{
+	ListDateType val;
+	struct ListNode* prev;
+	struct ListNode* next;
+}ListNode;	
+ 
+//初始化双向链表
+ListNode* ListInit(ListNode* phead);
+//双向链表打印
+void ListPrint(ListNode* phead);
+// 创建返回链表的头结点.
+ListNode* BuyList(ListDateType x);
+//双向链表尾插
+void ListPushBack(ListNode* phead,ListDateType x);
+//双向链表尾删
+void ListPopBack(ListNode* phead);
+//双向链表头插
+void ListPushFront(ListNode* phead, ListDateType x);
+//双向链表头删
+void ListPopFront(ListNode* phead);
+//双向链表查找
+ListNode* ListFind(ListNode* pHead, ListDateType x);
+//在pos之前插入
+void ListInsert(ListNode* pos, ListDateType x);
+//删除pos位置
+void ListErase(ListNode* pos);
 
 
 
@@ -67,9 +127,12 @@ char * longestPalindrome(char * s);//（动态规划思想解决）
 
 
 /*===============================================================================8、翻转字符串里的单词===============================================================================*/
-char * reverse_string(char* arr);//采用递归思想
+char * reverse_word(char* arr);
 
-
+/*===============================================================================9、实现 strStr()===============================================================================*/
 int strstr1(char ** str_array,int len);
+
+/*===============================================================================10、实现 反转字符串===============================================================================*/
+char * reverse_string(char* arr);//采用递归思想
 
 #endif

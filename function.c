@@ -4,7 +4,8 @@
 #include "function.h"
 #include <string.h>
 #include <stdbool.h>
-
+#include <ctype.h>
+#include <assert.h>
 
 //生成一个数组
 void arr_setup_1D(int len,int* array){
@@ -596,6 +597,43 @@ char * reverse_string(char* arr)
 }
 
 
+// 翻转单词(没解决)
+
+char * reverse_word(char* arr)
+{
+
+	int len = strlen(arr);
+	char *arr1;
+	arr1 = (char *)malloc(sizeof(char)*len);
+	arr1 = "aaa bbb cc dddd ";
+	int j = len;
+	int k,i,h;
+	printf("%s\n", arr);
+	printf("%c\n", arr[0]);
+	printf("%c\n", arr[len]);
+		printf("%s\n", arr1);
+	printf("%c\n", arr1[0]);
+	printf("%c\n", arr1[len]);
+	h =0;
+
+	for(i=0;i<len - 1 ;i++)
+	{
+		
+		if(isspace(arr[i]))
+		{
+			printf("使用reverse_string\n");
+			arr1 = reverse_string(arr1);
+
+		} 
+	}
+	return arr1;
+
+}
+
+
+
+
+//给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串的第一个匹配项的下标（下标从 0 开始）。
 int strstr1(char ** str_array,int len)
 {
 	int j =0;
@@ -625,4 +663,160 @@ int strstr1(char ** str_array,int len)
 	}
 	return j;
 
+}
+
+// typedef struct SListNode
+// {
+//  SLTDateType data;
+//  struct SListNode* next;
+// }SListNode;
+
+// 动态申请一个节点
+SListNode* BuySListNode(SLTDateType x)
+{
+	SListNode * tmp;
+	tmp = (SListNode *)malloc(sizeof(SListNode));
+	if(tmp == NULL)
+	{
+		printf("无法开辟出空间节点，说明内存中的堆已经溢出了\n");
+		return NULL;
+	}
+	else
+	{
+		tmp->data = x;
+		tmp->next = NULL;
+		return tmp;
+	}
+}
+
+// 单链表打印
+void SListPrint(SListNode* plist)
+{
+	SListNode *head = plist;//一定要用中间变量，否则改变了原来指针的数值
+	while(head != NULL)
+	{
+		printf("%d\n",head->data);
+		head = head->next;
+	}
+}
+
+// 单链表尾插
+void SListPushBack(SListNode* pplist, SLTDateType x)
+{
+	SListNode *newnode =BuySListNode(x);
+
+	if(pplist == NULL)
+	{
+		pplist = newnode;
+	}
+	else
+	{
+
+		SListNode *tail = pplist;//一定要用中间变量，否则改变了原来指针的数值
+		while(tail->next != NULL)
+			tail = tail->next;
+		tail->next = newnode;
+	}
+}
+
+// 单链表的头插
+void SListPushFront(SListNode** pplist, SLTDateType x)
+{
+	SListNode* newnode = BuySListNode(x);
+	if(*pplist == NULL)
+	{
+		*pplist = newnode;
+	}
+	else
+	{
+		newnode->next = *pplist;
+		*pplist = newnode;
+	}
+
+}
+
+// 单链表的尾删
+void SListPopBack(SListNode** pplist)
+{
+	assert(*pplist);
+	SListNode* cur = *pplist;
+	SListNode* prev = NULL;
+	if(cur->next == NULL)
+	{
+		free(cur);
+	}
+	else
+	{
+		while(cur->next != NULL)
+		{
+			prev = cur;
+			cur = cur->next;
+		}
+		free(cur);
+		prev->next = NULL;
+	}
+}
+
+// 单链表头删
+void SListPopFront(SListNode** pplist)
+{
+	assert( *pplist);
+	SListNode* cur = *pplist;
+	if((*pplist)->next == NULL)
+	{
+		free(*pplist);
+		*pplist = NULL;
+	}
+	else
+	{
+		cur = cur->next;
+		free(*pplist);
+		*pplist = cur; 
+	}
+
+}
+
+
+// 单链表查找
+SListNode* SListFind(SListNode* plist, SLTDateType x)
+{
+	assert(plist);
+	while (plist != NULL)
+	{
+		if (plist->data == x)
+		{
+			return plist;
+		}
+		plist = plist->next;
+	}
+	return NULL;
+}
+
+// 单链表在pos位置之后插入x
+void SListInsertAfter(SListNode* pos, SLTDateType x)
+{
+	assert(pos);
+	SListNode* newnode = BuySListNode(x);
+	newnode->next = pos->next;
+	pos->next = newnode;
+}
+
+// 单链表删除pos位置之后的值
+void SListEraseAfter(SListNode* pos)
+{
+	assert(pos);
+	if (pos->next == NULL)
+	{
+		printf("后面无数据\n");
+		return;
+	}
+	else
+	{
+		SListNode* prev = pos;
+		SListNode* cur = pos->next;
+		prev->next = cur->next;
+		free(cur);
+		cur = NULL;
+	}
+ 
 }
