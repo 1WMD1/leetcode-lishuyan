@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 #include <assert.h>
+#include <stdbool.h>
 
 //生成一个数组
 void arr_setup_1D(int len,int* array){
@@ -862,7 +863,7 @@ ListNode* BuyList(ListDateType x)
 //双向链表尾插
 void ListPushBack(ListNode* phead, ListDateType x)
 {
-	assert(phead);
+	assert(phead);//
 	ListNode* newnode = BuyList(x);
 	ListNode* tail = phead->prev;
  
@@ -954,7 +955,8 @@ void ListErase(ListNode* pos)
 	pos = NULL;
 }
 
-//栈的初始化
+
+//栈的初始化(操作受限的线性表)
 void StackInit(SequenceStack *S)
 {
 	S->top = -1; //让栈顶指针移动至-1位(最底)
@@ -1009,66 +1011,54 @@ int GetStackTop(SequenceStack *S)
 
 
 
-
-//队列的初始化
-void QueueInit(Queue* pq)
+void QueueInti(Queue* pq)
 {
-	assert(pq);
+	assert(pq); //防止pq为空指针
 	pq->head = pq->tail = NULL;
 }
 
-
-//队列的销毁
-void QueueDestroy(Queue* pq)
+void QueueDestory(Queue* pq)
 {
-	assert(pq);
- 
-	QNode* Dest = pq->head;
-	while (Dest)
+	assert(pq); //防止pq为空指针
+	QueueNode* cur = pq->head;
+	while (cur)
 	{
-		QNode* temp = Dest->next;
-		free(Dest);
-		Dest = temp;
+		QueueNode* next = cur->next;
+		free(cur);
+		cur = next;
 	}
-	pq->head = pq->tail = NULL;
+	pq->tail = pq->head = NULL;
 }
 
-
-//插入数据
-void QueuePush(Queue* pq, QDataType x)
+void QueuePush(Queue* pq, QDateType x)
 {
-	assert(pq);
-	//创建一个节点
-	QNode* newnode = (QNode*)malloc(sizeof(QNode));
-	if (newnode == NULL)
+	assert(pq); //防止pq为空指针
+
+	QueueNode* newNode = (QueueNode*)malloc(sizeof(QueueNode));
+	if (NULL == newNode)
 	{
-		printf("malloc fail\n");
+		printf("malloc error\n");
 		exit(-1);
 	}
-	newnode->data = x;
-	newnode->next = NULL;
-	//判断pq是不是一个空结点
-	//如果是 则将newnode置为当前队列的第一个结点
-	//如果不是  则将newnode链接到pq的下一个位置
-	if (pq->tail == NULL)
-	{   //两个节点都指向newnode 表示此时队列中就一个元素
-		pq->head = pq->tail = newnode;
-	}
-	else 
+	newNode->val = x;
+	newNode->next = NULL;//开辟一个新节点存储数据
+
+	if (pq->tail == NULL)//判断是否为空队列
 	{
-		//1.将newnode链接到tail的后面
-		pq->tail->next = newnode;
-		//2.将newnode置换为新的tail
-		pq->tail = newnode;
+		assert(pq->head == NULL);
+		pq->head = pq->tail = newNode;
+	}
+	else
+	{
+		pq->tail->next = newNode;
+		pq->tail = newNode;
 	}
 }
 
-//删除数据
 void QueuePop(Queue* pq)
 {
-	assert(pq);
-	assert(!QueueEmpty(pq));
-	//额外判断一下，解决如果仅剩一个结点了，pop的话导致tail为野指针
+	assert(pq);//防止pq为空指针
+	assert(pq->head && pq->tail); //防止队列为空队列
 	if (pq->head->next == NULL)
 	{
 		free(pq->head);
@@ -1076,45 +1066,32 @@ void QueuePop(Queue* pq)
 	}
 	else
 	{
-		QNode* next = pq->head->next;
+		QueueNode* next = pq->head->next;
 		free(pq->head);
 		pq->head = next;
 	}
 }
 
+QDateType QueueFront(Queue* pq)
+{
+	assert(pq);//防止pq为空指针
+	assert(pq->head && pq->tail); //防止队列为空队列
 
-//队列的判空
+	return pq->head->val;
+}
+
 bool QueueEmpty(Queue* pq)
 {
 	assert(pq);
+
 	return pq->head == NULL;
 }
 
-
-//队列头部数据
-QDataType QueueFront(Queue* pq)
+int QueueSize(Queue* pq)
 {
 	assert(pq);
-	assert(!QueueEmpty(pq));
-	return pq->head->data;
-}
-
-
- //队列尾部数据
-QDataType QueueBck(Queue* pq)
-{
-	assert(pq);
-	assert(!QueueEmpty(pq));
-	return pq->tail ->data;
-}
-
-
- //队列的大小
-int QueueSize(Queue *pq)
-{
-	assert(pq);
+	QueueNode* cur = pq->head;
 	int count = 0;
-	QNode* cur = pq->head;
 	while (cur)
 	{
 		cur = cur->next;
