@@ -1,12 +1,12 @@
-# leetcode-lishuyan
+# leetcode
 **力扣每日一题**，采用工程思维。
 ***
-main.c：主程序<br />
-function.c:功能函数<br />
-function.h：头文件<br />
-Makefile:编译脚本<br />
-1.txt：Makefile逆向编译过程记录<br />
-其他文件：编译的过程文件<br />
+01_mergeAlternately:替合并字符串<br />
+02_moveZeroes:移动零<br />
+
+
+
+
 
 我个人建议的编译环境是linux+gcc<br />
 
