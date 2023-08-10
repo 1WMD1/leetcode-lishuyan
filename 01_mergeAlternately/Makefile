@@ -1,7 +1,7 @@
 
 all:main
 
-main:main.o function.o
+main:main.o 01_mergeAlternately.o
 	$(CC) $^ -o $@
 
 clean:
