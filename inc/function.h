@@ -4,12 +4,7 @@
 #define COUNT 100
 #define MaxStackSize 100
 /*===============================================================================0、通用函数===============================================================================*/
-//数组相关
-void arr_setup_1D(int n,int* array);//生成一维数组
-int insert_target(int* array,int len ,int target);//在一维数组中插入一个元素
 
-void arr_setup_2D(int row,int col,int array[row][col]);//生成二维数组
-struct array_2D_flag* search_arr_2D(int flags,int row ,int col,int array[row][col]);//遍历二位数组，找到（顺序查找）某个数值，并返回给主函数
 
 
 
