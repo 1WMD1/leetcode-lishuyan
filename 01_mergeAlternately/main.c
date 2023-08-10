@@ -8,7 +8,11 @@ int main()
 {
 	/*01.交替合并字符串*/
 	mergeAlternately();
-	/*02*/
+	/*02.移动零*/
+	moveZeroes(int* nums, int numsSize);
+
+
+
 
 
 	return 0;
