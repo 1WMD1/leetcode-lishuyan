@@ -3,7 +3,7 @@
 ***
 01_mergeAlternately:替合并字符串<br />
 02_moveZeroes:移动零<br />
-
+03_findMaxAverage:子数组最大平均数<br />
 
 
 
