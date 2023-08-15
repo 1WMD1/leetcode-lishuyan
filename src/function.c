@@ -859,57 +859,6 @@ void ListErase(ListNode* pos)
 }
 
 
-//栈的初始化(操作受限的线性表)
-void StackInit(SequenceStack *S)
-{
-	S->top = -1; //让栈顶指针移动至-1位(最底)
-}
-
-
-//判断此时栈是否为空
-bool JudgeStackEmpty(SequenceStack *S) //为空返回true，非空返回false
-{
-	if(S->top == -1)  // 判断此时栈顶指针是否和栈底指针是否重合(栈底默认为-1)
-		return true;
-	else
-		return false;
-}
-
-//进栈操作
-void StackPush(SequenceStack *S,int x)
-{
-	if(S->top == MaxStackSize - 1){  
-		printf("此时栈满");  //若栈满继续入栈会出现上溢问题
-	}
-	else{
-		S->top++;  //栈顶指针往上移动一格
-		S->stack[S->top] = x;   //将元素x存放在栈顶指针所指单元中
-		printf("入栈成功");
-	}
-}
-
-//出栈操作（删除栈顶元素，用变量x返回）
-int StackPop(SequenceStack *S)
-{
-	if(S->top == -1){
-		printf("此时为空栈，无法继续出栈"); //若栈空仍继续出栈，会出现下溢问题
-		return -1;//-1表示出栈失败
-	}
-	int x = S->stack[S->top]; 
-	S->top--; //栈顶指针下移，表示出栈了一个元素
-	return x;
-}
-
-
-//取栈顶元素
-int GetStackTop(SequenceStack *S)
-{
-	if(S->top == -1)  //判断此时是否为空
-		return -1; //-1表示此时无法取栈顶元素（可以根据题目要求进行调整)
-	int x = S->stack[S->top]; //类似于出栈存x的操作，但无需动栈顶指针
-	return x;
-}
-
 
 
 

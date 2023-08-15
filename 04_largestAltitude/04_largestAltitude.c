@@ -17,6 +17,4 @@ int largestAltitude(int* gain, int gainSize)
 
 	return maxsum;
 
-
-
 }
