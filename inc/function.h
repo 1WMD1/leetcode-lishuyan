@@ -10,56 +10,6 @@
 
 
 
-//栈
-typedef struct
-{
-	int stack[MaxStackSize]; //可以根据不同的数据类型进行更换，MaxStackSize定义了栈大小
-	int top; //定义此时栈顶元素的位置(数组下标)，每次入栈pos会自增1,再把相应的元素入栈
-}SequenceStack;
-
-
-//栈的初始化
-void StackInit(SequenceStack *S);
-//判断此时栈是否为空
-_Bool JudgeStackEmpty(SequenceStack *S); //为空返回true，非空返回false
-//进栈操作
-void StackPush(SequenceStack *S,int x);
-//出栈操作（删除栈顶元素，用变量x返回）
-int StackPop(SequenceStack *S);
-//取栈顶元素
-int GetStackTop(SequenceStack *S);
-
-
-
-//队列
-typedef int QDateType;//队列存储数据类型
-
-typedef struct QueueNode //队列元素节点
-{
-	QDateType val;
-	struct QueueNode* next;
-}QueueNode;
-
-typedef	struct Queue //队列
-{
-	QueueNode* head;
-	QueueNode* tail;
-}Queue;
-
-void QueueInti(Queue* pq);
-// 队列初始化
-void QueueDestory(Queue* pq);
-// 队列的销毁
-void QueuePush(Queue* pq, QDateType x);
-// 入队
-void QueuePop(Queue* pq);
-// 出队
-QDateType QueueFront(Queue* pq);
-// 取出队首元素
-int QueueSize(Queue* pq);
-// 求队列的长度
-_Bool QueueEmpty(Queue* pq);
-// 判断队是否为空
 
 
 
